@@ -1,0 +1,63 @@
+import {
+  Landmark,
+  Wallet,
+  CreditCard,
+  ShoppingCart,
+  Car,
+  Home,
+  Gamepad2,
+  HeartPulse,
+  GraduationCap,
+  Shirt,
+  Repeat,
+  Utensils,
+  Plane,
+  MoreHorizontal,
+  Briefcase,
+  Laptop,
+  TrendingUp,
+  Gift,
+  Shield,
+  PiggyBank,
+  Tag,
+  Film,
+  Coffee,
+  Dumbbell,
+  Baby,
+  Dog,
+} from 'lucide-react'
+
+export const ICONS = {
+  landmark: Landmark,
+  wallet: Wallet,
+  'credit-card': CreditCard,
+  'shopping-cart': ShoppingCart,
+  car: Car,
+  home: Home,
+  'gamepad-2': Gamepad2,
+  'heart-pulse': HeartPulse,
+  'graduation-cap': GraduationCap,
+  shirt: Shirt,
+  repeat: Repeat,
+  utensils: Utensils,
+  plane: Plane,
+  briefcase: Briefcase,
+  laptop: Laptop,
+  'trending-up': TrendingUp,
+  gift: Gift,
+  shield: Shield,
+  'piggy-bank': PiggyBank,
+  film: Film,
+  coffee: Coffee,
+  dumbbell: Dumbbell,
+  baby: Baby,
+  dog: Dog,
+  tag: Tag,
+  'more-horizontal': MoreHorizontal,
+}
+
+export const ICON_NAMES = Object.keys(ICONS)
+
+export function getIcon(name) {
+  return ICONS[name] ?? Tag
+}
