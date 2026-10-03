@@ -33,6 +33,7 @@ class TransactionBalanceService
             'income' => Account::whereKey($transaction->account_id)->increment('balance', $amount),
             'expense' => Account::whereKey($transaction->account_id)->decrement('balance', $amount),
             'transfer' => $this->adjustTransfer($transaction, $amount),
+            default => throw new \ValueError("Unknown transaction type [{$transaction->type}]."),
         };
     }
 

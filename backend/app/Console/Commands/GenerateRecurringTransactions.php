@@ -57,6 +57,7 @@ class GenerateRecurringTransactions extends Command
             'weekly' => $date->copy()->addWeek(),
             'monthly' => $date->copy()->addMonthNoOverflow(),
             'yearly' => $date->copy()->addYearNoOverflow(),
+            default => throw new \ValueError("Unknown recurrence frequency [{$frequency}]."),
         };
     }
 }

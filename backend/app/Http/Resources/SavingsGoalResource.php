@@ -2,9 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Models\SavingsGoal;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin SavingsGoal
+ */
 class SavingsGoalResource extends JsonResource
 {
     /**

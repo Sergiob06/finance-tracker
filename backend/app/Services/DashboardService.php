@@ -2,12 +2,17 @@
 
 namespace App\Services;
 
+use App\Models\Category;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class DashboardService
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function summary(User $user): array
     {
         $now = Carbon::now();
@@ -63,6 +68,9 @@ class DashboardService
         return [$income, $expense];
     }
 
+    /**
+     * @return Collection<int, array{category_id: int|null, name: string, color: string|null, icon: string|null, total: float}>
+     */
     private function expensesByCategory(User $user, Carbon $start, Carbon $end): Collection
     {
         return $user->transactions()
@@ -74,15 +82,24 @@ class DashboardService
             ->with('category:id,name,color,icon')
             ->orderByDesc('total')
             ->get()
-            ->map(fn ($row) => [
-                'category_id' => $row->category_id,
-                'name' => $row->category?->name ?? 'Sin categoría',
-                'color' => $row->category?->color,
-                'icon' => $row->category?->icon,
-                'total' => (float) $row->total,
-            ]);
+            ->map(function (Transaction $row) {
+                /** @var Category|null $category */
+                $category = $row->category;
+
+                return [
+                    'category_id' => $row->category_id,
+                    // @phpstan-ignore nullsafe.neverNull (category_id is nullable: null once the category has been deleted)
+                    'name' => $category?->name ?? 'Sin categoría',
+                    'color' => $category?->color,
+                    'icon' => $category?->icon,
+                    'total' => (float) $row->getAttribute('total'),
+                ];
+            });
     }
 
+    /**
+     * @return list<array{month: string, income: float, expense: float}>
+     */
     private function monthlyEvolution(User $user, int $months): array
     {
         $start = Carbon::now()->subMonths($months - 1)->startOfMonth();
@@ -102,9 +119,15 @@ class DashboardService
         foreach ($transactions as $transaction) {
             $key = $transaction->date->format('Y-m');
 
-            if (isset($buckets[$key])) {
-                $buckets[$key][$transaction->type] += (float) $transaction->amount;
+            if (! isset($buckets[$key])) {
+                continue;
             }
+
+            match ($transaction->type) {
+                'income' => $buckets[$key]['income'] += (float) $transaction->amount,
+                'expense' => $buckets[$key]['expense'] += (float) $transaction->amount,
+                default => null,
+            };
         }
 
         return array_values($buckets);

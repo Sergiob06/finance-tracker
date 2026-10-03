@@ -2,9 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Models\RecurringTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin RecurringTransaction
+ */
 class RecurringTransactionResource extends JsonResource
 {
     /**

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Services\TransactionBalanceService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -113,6 +114,7 @@ class TransactionController extends Controller
                     $transaction->date->toDateString(),
                     $transaction->type,
                     $transaction->account->name,
+                    // @phpstan-ignore nullsafe.neverNull (category_id is nullable: null for transfers and when the category was deleted)
                     $transaction->category?->name ?? '',
                     $transaction->description,
                     number_format((float) $transaction->amount, 2, '.', ''),
@@ -138,6 +140,9 @@ class TransactionController extends Controller
         return $pdf->download('transacciones.pdf');
     }
 
+    /**
+     * @return HasMany<Transaction, User>
+     */
     private function filteredQuery(Request $request): HasMany
     {
         $filters = $request->validate([
@@ -149,6 +154,7 @@ class TransactionController extends Controller
             'search' => ['nullable', 'string', 'max:255'],
         ]);
 
+        // @phpstan-ignore return.type (Relation::__call forwards chainable query-builder calls but returns $this, so this stays a HasMany at runtime)
         return $request->user()->transactions()
             ->with(['account', 'category', 'transferToAccount'])
             ->when($filters['date_from'] ?? null, fn ($q, $v) => $q->whereDate('date', '>=', $v))
