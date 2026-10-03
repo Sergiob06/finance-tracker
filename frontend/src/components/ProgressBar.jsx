@@ -6,7 +6,10 @@ export default function ProgressBar({ percentage, exceeded = false }) {
 
   return (
     <div className="h-2 w-full rounded-full bg-gray-100 dark:bg-gray-800">
-      <div className={clsx('h-2 rounded-full transition-all', color)} style={{ width: `${clamped}%` }} />
+      <div
+        className={clsx('h-2 rounded-full transition-all', color)}
+        style={{ width: `${clamped}%` }}
+      />
     </div>
   )
 }

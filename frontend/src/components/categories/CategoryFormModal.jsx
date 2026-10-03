@@ -62,14 +62,29 @@ export default function CategoryFormModal({ onClose, category, defaultType = 'ex
       }
     >
       <form id="category-form" onSubmit={handleSubmit} className="space-y-4">
-        <FormField label="Nombre" name="name" value={form.name} onChange={handleChange} error={errors.name} />
+        <FormField
+          label="Nombre"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          error={errors.name}
+        />
 
-        <SelectField label="Tipo" name="type" value={form.type} onChange={handleChange} error={errors.type}>
+        <SelectField
+          label="Tipo"
+          name="type"
+          value={form.type}
+          onChange={handleChange}
+          error={errors.type}
+        >
           <option value="expense">Gasto</option>
           <option value="income">Ingreso</option>
         </SelectField>
 
-        <ColorPicker value={form.color} onChange={(color) => setForm((prev) => ({ ...prev, color }))} />
+        <ColorPicker
+          value={form.color}
+          onChange={(color) => setForm((prev) => ({ ...prev, color }))}
+        />
         <IconPicker value={form.icon} onChange={(icon) => setForm((prev) => ({ ...prev, icon }))} />
       </form>
     </Modal>

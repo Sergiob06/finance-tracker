@@ -32,7 +32,10 @@ export default function AccountsPage() {
       {isPending && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="h-32 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800" />
+            <div
+              key={index}
+              className="h-32 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800"
+            />
           ))}
         </div>
       )}
@@ -60,7 +63,9 @@ export default function AccountsPage() {
                     </div>
                     <div>
                       <p className="font-medium text-gray-900 dark:text-white">{account.name}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{TYPE_LABELS[account.type]}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {TYPE_LABELS[account.type]}
+                      </p>
                     </div>
                   </div>
 
@@ -84,7 +89,9 @@ export default function AccountsPage() {
 
                 <p
                   className={`mt-4 text-xl font-semibold ${
-                    account.balance < 0 ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-white'
+                    account.balance < 0
+                      ? 'text-red-600 dark:text-red-400'
+                      : 'text-gray-900 dark:text-white'
                   }`}
                 >
                   {formatCurrency(account.balance)}

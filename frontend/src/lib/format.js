@@ -25,7 +25,20 @@ export function formatPercent(value) {
   return `${sign}${value}%`
 }
 
-const MONTH_LABELS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+const MONTH_LABELS = [
+  'ene',
+  'feb',
+  'mar',
+  'abr',
+  'may',
+  'jun',
+  'jul',
+  'ago',
+  'sep',
+  'oct',
+  'nov',
+  'dic',
+]
 
 export function formatMonthLabel(monthKey) {
   const [year, month] = monthKey.split('-')

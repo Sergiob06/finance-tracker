@@ -158,7 +158,12 @@ export default function TransactionsPage() {
               </option>
             ))}
           </SelectField>
-          <SelectField label="Tipo" name="type" value={filters.type} onChange={(event) => updateFilter('type', event.target.value)}>
+          <SelectField
+            label="Tipo"
+            name="type"
+            value={filters.type}
+            onChange={(event) => updateFilter('type', event.target.value)}
+          >
             <option value="">Todos</option>
             <option value="income">Ingreso</option>
             <option value="expense">Gasto</option>
@@ -175,7 +180,9 @@ export default function TransactionsPage() {
       </Card>
 
       <Card>
-        {isPending && <div className="h-64 animate-pulse rounded-xl bg-gray-100 dark:bg-gray-800" />}
+        {isPending && (
+          <div className="h-64 animate-pulse rounded-xl bg-gray-100 dark:bg-gray-800" />
+        )}
 
         {!isPending && transactions.length === 0 && (
           <EmptyState message="No hay transacciones que coincidan con estos filtros." />
@@ -196,14 +203,18 @@ export default function TransactionsPage() {
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {transactions.map((transaction) => {
-                  const CategoryIcon = transaction.category ? getIcon(transaction.category.icon) : null
+                  const CategoryIcon = transaction.category
+                    ? getIcon(transaction.category.icon)
+                    : null
 
                   return (
                     <tr key={transaction.id}>
                       <td className="py-3 whitespace-nowrap text-gray-600 dark:text-gray-300">
                         {new Date(transaction.date).toLocaleDateString('es-ES')}
                       </td>
-                      <td className="py-3 text-gray-700 dark:text-gray-300">{transaction.description || '—'}</td>
+                      <td className="py-3 text-gray-700 dark:text-gray-300">
+                        {transaction.description || '—'}
+                      </td>
                       <td className="py-3">
                         {transaction.category ? (
                           <Badge color={transaction.category.color} icon={CategoryIcon}>
@@ -218,7 +229,9 @@ export default function TransactionsPage() {
                           ? `${transaction.account.name} → ${transaction.transfer_to_account.name}`
                           : transaction.account.name}
                       </td>
-                      <td className={`py-3 text-right font-medium whitespace-nowrap ${AMOUNT_COLOR[transaction.type]}`}>
+                      <td
+                        className={`py-3 text-right font-medium whitespace-nowrap ${AMOUNT_COLOR[transaction.type]}`}
+                      >
                         {AMOUNT_SIGN[transaction.type]}
                         {formatCurrency(transaction.amount)}
                       </td>
@@ -249,7 +262,10 @@ export default function TransactionsPage() {
         )}
 
         <div className="mt-4">
-          <Pagination meta={data?.meta} onPageChange={(page) => updateFilter('page', String(page))} />
+          <Pagination
+            meta={data?.meta}
+            onPageChange={(page) => updateFilter('page', String(page))}
+          />
         </div>
       </Card>
 
@@ -265,7 +281,9 @@ export default function TransactionsPage() {
       <ConfirmDialog
         open={Boolean(deleting)}
         onClose={() => setDeleting(null)}
-        onConfirm={() => deleteTransaction.mutate(deleting.id, { onSuccess: () => setDeleting(null) })}
+        onConfirm={() =>
+          deleteTransaction.mutate(deleting.id, { onSuccess: () => setDeleting(null) })
+        }
         message="Se eliminará esta transacción y se actualizará el saldo de la cuenta correspondiente."
         isLoading={deleteTransaction.isPending}
       />

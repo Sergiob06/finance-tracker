@@ -1,4 +1,14 @@
-export default function FormField({ label, name, type = 'text', value, onChange, error, autoComplete, placeholder, ...rest }) {
+export default function FormField({
+  label,
+  name,
+  type = 'text',
+  value,
+  onChange,
+  error,
+  autoComplete,
+  placeholder,
+  ...rest
+}) {
   return (
     <div>
       <label htmlFor={name} className="block text-sm font-medium text-gray-700 dark:text-gray-300">

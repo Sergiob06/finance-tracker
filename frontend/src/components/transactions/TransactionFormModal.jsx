@@ -30,7 +30,9 @@ export default function TransactionFormModal({ onClose, transaction, accounts, c
           type: transaction.type,
           account_id: String(transaction.account.id),
           category_id: transaction.category ? String(transaction.category.id) : '',
-          transfer_to_account_id: transaction.transfer_to_account ? String(transaction.transfer_to_account.id) : '',
+          transfer_to_account_id: transaction.transfer_to_account
+            ? String(transaction.transfer_to_account.id)
+            : '',
           amount: String(transaction.amount),
           description: transaction.description ?? '',
           date: transaction.date,
@@ -71,7 +73,9 @@ export default function TransactionFormModal({ onClose, transaction, accounts, c
         : { category_id: form.category_id, receipt: form.receipt }),
     }
 
-    mutation.mutate(isEditing ? { id: transaction.id, data: payload } : payload, { onSuccess: onClose })
+    mutation.mutate(isEditing ? { id: transaction.id, data: payload } : payload, {
+      onSuccess: onClose,
+    })
   }
 
   return (
@@ -101,7 +105,13 @@ export default function TransactionFormModal({ onClose, transaction, accounts, c
       }
     >
       <form id="transaction-form" onSubmit={handleSubmit} className="space-y-4">
-        <SelectField label="Tipo" name="type" value={form.type} onChange={handleTypeChange} error={errors.type}>
+        <SelectField
+          label="Tipo"
+          name="type"
+          value={form.type}
+          onChange={handleTypeChange}
+          error={errors.type}
+        >
           <option value="expense">Gasto</option>
           <option value="income">Ingreso</option>
           <option value="transfer">Transferencia</option>
@@ -141,7 +151,13 @@ export default function TransactionFormModal({ onClose, transaction, accounts, c
                 ))}
             </SelectField>
           ) : (
-            <SelectField label="Categoría" name="category_id" value={form.category_id} onChange={handleChange} error={errors.category_id}>
+            <SelectField
+              label="Categoría"
+              name="category_id"
+              value={form.category_id}
+              onChange={handleChange}
+              error={errors.category_id}
+            >
               <option value="">Selecciona…</option>
               {filteredCategories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -163,14 +179,29 @@ export default function TransactionFormModal({ onClose, transaction, accounts, c
             onChange={handleChange}
             error={errors.amount}
           />
-          <FormField label="Fecha" name="date" type="date" value={form.date} onChange={handleChange} error={errors.date} />
+          <FormField
+            label="Fecha"
+            name="date"
+            type="date"
+            value={form.date}
+            onChange={handleChange}
+            error={errors.date}
+          />
         </div>
 
-        <FormField label="Descripción" name="description" value={form.description} onChange={handleChange} error={errors.description} />
+        <FormField
+          label="Descripción"
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          error={errors.description}
+        />
 
         {form.type !== 'transfer' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Recibo (opcional)</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              Recibo (opcional)
+            </label>
             <input
               type="file"
               accept="image/*"
@@ -187,7 +218,9 @@ export default function TransactionFormModal({ onClose, transaction, accounts, c
                 Ver recibo actual
               </a>
             )}
-            {errors.receipt && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.receipt[0]}</p>}
+            {errors.receipt && (
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.receipt[0]}</p>
+            )}
           </div>
         )}
       </form>

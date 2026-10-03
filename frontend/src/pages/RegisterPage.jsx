@@ -32,9 +32,32 @@ export default function RegisterPage() {
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-        <FormField label="Nombre" name="name" value={form.name} onChange={handleChange} error={errors.name} autoComplete="name" />
-        <FormField label="Correo electrónico" name="email" type="email" value={form.email} onChange={handleChange} error={errors.email} autoComplete="email" />
-        <FormField label="Contraseña" name="password" type="password" value={form.password} onChange={handleChange} error={errors.password} autoComplete="new-password" />
+        <FormField
+          label="Nombre"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          error={errors.name}
+          autoComplete="name"
+        />
+        <FormField
+          label="Correo electrónico"
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          error={errors.email}
+          autoComplete="email"
+        />
+        <FormField
+          label="Contraseña"
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={handleChange}
+          error={errors.password}
+          autoComplete="new-password"
+        />
         <FormField
           label="Confirmar contraseña"
           name="password_confirmation"
@@ -55,7 +78,10 @@ export default function RegisterPage() {
 
       <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
         ¿Ya tienes cuenta?{' '}
-        <Link to="/login" className="font-medium text-indigo-600 hover:underline dark:text-indigo-400">
+        <Link
+          to="/login"
+          className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+        >
           Inicia sesión
         </Link>
       </p>

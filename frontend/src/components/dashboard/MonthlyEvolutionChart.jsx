@@ -1,4 +1,13 @@
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import Card from '../Card'
 import { formatCurrency, formatCurrencyCompact, formatMonthLabel } from '../../lib/format'
 import { useChartColors } from '../../hooks/useChartColors'
@@ -37,8 +46,24 @@ export default function MonthlyEvolutionChart({ data }) {
             }}
           />
           <Legend wrapperStyle={{ fontSize: 13, color: colors.axis }} />
-          <Line type="monotone" dataKey="income" name="Ingresos" stroke="#10B981" strokeWidth={2.5} dot={false} activeDot={{ r: 4 }} />
-          <Line type="monotone" dataKey="expense" name="Gastos" stroke="#EF4444" strokeWidth={2.5} dot={false} activeDot={{ r: 4 }} />
+          <Line
+            type="monotone"
+            dataKey="income"
+            name="Ingresos"
+            stroke="#10B981"
+            strokeWidth={2.5}
+            dot={false}
+            activeDot={{ r: 4 }}
+          />
+          <Line
+            type="monotone"
+            dataKey="expense"
+            name="Gastos"
+            stroke="#EF4444"
+            strokeWidth={2.5}
+            dot={false}
+            activeDot={{ r: 4 }}
+          />
         </LineChart>
       </ResponsiveContainer>
     </Card>

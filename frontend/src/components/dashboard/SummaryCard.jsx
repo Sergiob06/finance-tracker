@@ -22,16 +22,27 @@ export default function SummaryCard({ icon: Icon, label, value, tone = 'indigo',
             <p
               className={clsx(
                 'mt-1 flex items-center gap-1 text-xs font-medium',
-                trend.isGood ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400',
+                trend.isGood
+                  ? 'text-emerald-600 dark:text-emerald-400'
+                  : 'text-red-600 dark:text-red-400',
               )}
             >
-              {trend.direction === 'up' ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />}
+              {trend.direction === 'up' ? (
+                <ArrowUp className="size-3" />
+              ) : (
+                <ArrowDown className="size-3" />
+              )}
               {formatPercent(trend.value)} vs. mes anterior
             </p>
           )}
         </div>
 
-        <div className={clsx('flex size-10 shrink-0 items-center justify-center rounded-xl', TONE_CLASSES[tone])}>
+        <div
+          className={clsx(
+            'flex size-10 shrink-0 items-center justify-center rounded-xl',
+            TONE_CLASSES[tone],
+          )}
+        >
           <Icon className="size-5" />
         </div>
       </div>

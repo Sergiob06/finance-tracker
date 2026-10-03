@@ -2,7 +2,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import * as recurringApi from '../api/recurringTransactions'
 
 export function useRecurringTransactions() {
-  return useQuery({ queryKey: ['recurringTransactions'], queryFn: recurringApi.fetchRecurringTransactions })
+  return useQuery({
+    queryKey: ['recurringTransactions'],
+    queryFn: recurringApi.fetchRecurringTransactions,
+  })
 }
 
 function useInvalidateRecurringTransactions() {

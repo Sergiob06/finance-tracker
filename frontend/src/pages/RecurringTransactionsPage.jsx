@@ -30,7 +30,9 @@ export default function RecurringTransactionsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Transacciones recurrentes</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+          Transacciones recurrentes
+        </h1>
         <button
           type="button"
           onClick={() => setModalItem(null)}
@@ -41,7 +43,9 @@ export default function RecurringTransactionsPage() {
       </div>
 
       <Card>
-        {isPending && <div className="h-48 animate-pulse rounded-xl bg-gray-100 dark:bg-gray-800" />}
+        {isPending && (
+          <div className="h-48 animate-pulse rounded-xl bg-gray-100 dark:bg-gray-800" />
+        )}
 
         {!isPending && recurringTransactions?.length === 0 && (
           <EmptyState message="No tienes transacciones recurrentes configuradas." />
@@ -68,8 +72,12 @@ export default function RecurringTransactionsPage() {
 
                   return (
                     <tr key={item.id}>
-                      <td className="py-3 text-gray-700 dark:text-gray-300">{item.description || '—'}</td>
-                      <td className="py-3 whitespace-nowrap text-gray-600 dark:text-gray-300">{item.account.name}</td>
+                      <td className="py-3 text-gray-700 dark:text-gray-300">
+                        {item.description || '—'}
+                      </td>
+                      <td className="py-3 whitespace-nowrap text-gray-600 dark:text-gray-300">
+                        {item.account.name}
+                      </td>
                       <td className="py-3">
                         {item.category ? (
                           <Badge color={item.category.color} icon={CategoryIcon}>
@@ -87,7 +95,9 @@ export default function RecurringTransactionsPage() {
                       </td>
                       <td
                         className={`py-3 text-right font-medium whitespace-nowrap ${
-                          item.type === 'income' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'
+                          item.type === 'income'
+                            ? 'text-emerald-600 dark:text-emerald-400'
+                            : 'text-red-600 dark:text-red-400'
                         }`}
                       >
                         {item.type === 'income' ? '+' : '-'}
@@ -97,7 +107,9 @@ export default function RecurringTransactionsPage() {
                         <Switch
                           checked={item.active}
                           disabled={updateRecurring.isPending}
-                          onChange={(active) => updateRecurring.mutate({ id: item.id, data: { active } })}
+                          onChange={(active) =>
+                            updateRecurring.mutate({ id: item.id, data: { active } })
+                          }
                         />
                       </td>
                       <td className="py-3 pl-4 text-right">
@@ -139,7 +151,9 @@ export default function RecurringTransactionsPage() {
       <ConfirmDialog
         open={Boolean(deleting)}
         onClose={() => setDeleting(null)}
-        onConfirm={() => deleteRecurring.mutate(deleting.id, { onSuccess: () => setDeleting(null) })}
+        onConfirm={() =>
+          deleteRecurring.mutate(deleting.id, { onSuccess: () => setDeleting(null) })
+        }
         message="Se eliminará esta transacción recurrente. Las transacciones ya generadas no se verán afectadas."
         isLoading={deleteRecurring.isPending}
       />

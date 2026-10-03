@@ -2,7 +2,10 @@ import { useState } from 'react'
 import Modal from '../Modal'
 import FormField from '../FormField'
 import SelectField from '../SelectField'
-import { useCreateRecurringTransaction, useUpdateRecurringTransaction } from '../../hooks/useRecurringTransactions'
+import {
+  useCreateRecurringTransaction,
+  useUpdateRecurringTransaction,
+} from '../../hooks/useRecurringTransactions'
 
 const FREQUENCIES = [
   { value: 'daily', label: 'Diaria' },
@@ -26,7 +29,12 @@ function defaultForm(accounts) {
 // The parent only mounts this component while the modal should be open (see
 // RecurringTransactionsPage), so a lazy initializer is enough to seed the
 // form — no effect needed to "reset" it, since mounting fresh already does that.
-export default function RecurringTransactionFormModal({ onClose, recurringTransaction, accounts, categories }) {
+export default function RecurringTransactionFormModal({
+  onClose,
+  recurringTransaction,
+  accounts,
+  categories,
+}) {
   const isEditing = Boolean(recurringTransaction)
   const createRecurring = useCreateRecurringTransaction()
   const updateRecurring = useUpdateRecurringTransaction()
@@ -35,7 +43,9 @@ export default function RecurringTransactionFormModal({ onClose, recurringTransa
       ? {
           type: recurringTransaction.type,
           account_id: String(recurringTransaction.account.id),
-          category_id: recurringTransaction.category ? String(recurringTransaction.category.id) : '',
+          category_id: recurringTransaction.category
+            ? String(recurringTransaction.category.id)
+            : '',
           amount: String(recurringTransaction.amount),
           description: recurringTransaction.description ?? '',
           frequency: recurringTransaction.frequency,
@@ -59,7 +69,9 @@ export default function RecurringTransactionFormModal({ onClose, recurringTransa
 
   function handleSubmit(event) {
     event.preventDefault()
-    mutation.mutate(isEditing ? { id: recurringTransaction.id, data: form } : form, { onSuccess: onClose })
+    mutation.mutate(isEditing ? { id: recurringTransaction.id, data: form } : form, {
+      onSuccess: onClose,
+    })
   }
 
   return (
@@ -89,13 +101,25 @@ export default function RecurringTransactionFormModal({ onClose, recurringTransa
       }
     >
       <form id="recurring-form" onSubmit={handleSubmit} className="space-y-4">
-        <SelectField label="Tipo" name="type" value={form.type} onChange={handleTypeChange} error={errors.type}>
+        <SelectField
+          label="Tipo"
+          name="type"
+          value={form.type}
+          onChange={handleTypeChange}
+          error={errors.type}
+        >
           <option value="expense">Gasto</option>
           <option value="income">Ingreso</option>
         </SelectField>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <SelectField label="Cuenta" name="account_id" value={form.account_id} onChange={handleChange} error={errors.account_id}>
+          <SelectField
+            label="Cuenta"
+            name="account_id"
+            value={form.account_id}
+            onChange={handleChange}
+            error={errors.account_id}
+          >
             <option value="">Selecciona…</option>
             {accounts.map((account) => (
               <option key={account.id} value={account.id}>
@@ -104,7 +128,13 @@ export default function RecurringTransactionFormModal({ onClose, recurringTransa
             ))}
           </SelectField>
 
-          <SelectField label="Categoría" name="category_id" value={form.category_id} onChange={handleChange} error={errors.category_id}>
+          <SelectField
+            label="Categoría"
+            name="category_id"
+            value={form.category_id}
+            onChange={handleChange}
+            error={errors.category_id}
+          >
             <option value="">Selecciona…</option>
             {filteredCategories.map((category) => (
               <option key={category.id} value={category.id}>
@@ -125,7 +155,13 @@ export default function RecurringTransactionFormModal({ onClose, recurringTransa
             onChange={handleChange}
             error={errors.amount}
           />
-          <SelectField label="Frecuencia" name="frequency" value={form.frequency} onChange={handleChange} error={errors.frequency}>
+          <SelectField
+            label="Frecuencia"
+            name="frequency"
+            value={form.frequency}
+            onChange={handleChange}
+            error={errors.frequency}
+          >
             {FREQUENCIES.map((frequency) => (
               <option key={frequency.value} value={frequency.value}>
                 {frequency.label}
@@ -143,7 +179,13 @@ export default function RecurringTransactionFormModal({ onClose, recurringTransa
           error={errors.next_run_date}
         />
 
-        <FormField label="Descripción" name="description" value={form.description} onChange={handleChange} error={errors.description} />
+        <FormField
+          label="Descripción"
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          error={errors.description}
+        />
       </form>
     </Modal>
   )

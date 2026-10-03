@@ -5,7 +5,13 @@ import ColorPicker from '../ColorPicker'
 import IconPicker from '../IconPicker'
 import { useCreateSavingsGoal, useUpdateSavingsGoal } from '../../hooks/useSavingsGoals'
 
-const DEFAULT_FORM = { name: '', target_amount: '', target_date: '', color: '#6366F1', icon: 'piggy-bank' }
+const DEFAULT_FORM = {
+  name: '',
+  target_amount: '',
+  target_date: '',
+  color: '#6366F1',
+  icon: 'piggy-bank',
+}
 
 // The parent only mounts this component while the modal should be open (see
 // SavingsGoalsPage), so a lazy initializer is enough to seed the form — no
@@ -65,7 +71,13 @@ export default function SavingsGoalFormModal({ onClose, savingsGoal }) {
       }
     >
       <form id="savings-goal-form" onSubmit={handleSubmit} className="space-y-4">
-        <FormField label="Nombre" name="name" value={form.name} onChange={handleChange} error={errors.name} />
+        <FormField
+          label="Nombre"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          error={errors.name}
+        />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField
@@ -88,7 +100,10 @@ export default function SavingsGoalFormModal({ onClose, savingsGoal }) {
           />
         </div>
 
-        <ColorPicker value={form.color} onChange={(color) => setForm((prev) => ({ ...prev, color }))} />
+        <ColorPicker
+          value={form.color}
+          onChange={(color) => setForm((prev) => ({ ...prev, color }))}
+        />
         <IconPicker value={form.icon} onChange={(icon) => setForm((prev) => ({ ...prev, icon }))} />
       </form>
     </Modal>

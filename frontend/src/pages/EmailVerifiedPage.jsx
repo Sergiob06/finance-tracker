@@ -22,7 +22,10 @@ export default function EmailVerifiedPage() {
           : 'Este enlace de verificación ya no es válido. Solicita uno nuevo desde tu cuenta.'}
       </p>
 
-      <Link to="/" className="mt-6 inline-block text-sm font-medium text-indigo-600 hover:underline dark:text-indigo-400">
+      <Link
+        to="/"
+        className="mt-6 inline-block text-sm font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+      >
         Ir al panel
       </Link>
     </div>

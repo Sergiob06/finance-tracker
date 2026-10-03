@@ -54,7 +54,12 @@ export default function DashboardPage() {
       {data && (
         <>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <SummaryCard icon={Landmark} label="Balance total" value={formatCurrency(data.balance_total)} tone="indigo" />
+            <SummaryCard
+              icon={Landmark}
+              label="Balance total"
+              value={formatCurrency(data.balance_total)}
+              tone="indigo"
+            />
             <SummaryCard
               icon={TrendingUp}
               label="Ingresos del mes"
@@ -69,7 +74,12 @@ export default function DashboardPage() {
               tone="red"
               trend={trendFor(data.comparison.expense_change_percent, { invert: true })}
             />
-            <SummaryCard icon={PiggyBank} label="Balance del mes" value={formatCurrency(data.current_month.net)} tone="amber" />
+            <SummaryCard
+              icon={PiggyBank}
+              label="Balance del mes"
+              value={formatCurrency(data.current_month.net)}
+              tone="amber"
+            />
           </div>
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">

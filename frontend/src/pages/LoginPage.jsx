@@ -27,11 +27,30 @@ export default function LoginPage() {
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-        <FormField label="Correo electrónico" name="email" type="email" value={form.email} onChange={handleChange} error={errors.email} autoComplete="email" />
-        <FormField label="Contraseña" name="password" type="password" value={form.password} onChange={handleChange} error={errors.password} autoComplete="current-password" />
+        <FormField
+          label="Correo electrónico"
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          error={errors.email}
+          autoComplete="email"
+        />
+        <FormField
+          label="Contraseña"
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={handleChange}
+          error={errors.password}
+          autoComplete="current-password"
+        />
 
         <div className="flex items-center justify-end text-sm">
-          <Link to="/forgot-password" className="text-indigo-600 hover:underline dark:text-indigo-400">
+          <Link
+            to="/forgot-password"
+            className="text-indigo-600 hover:underline dark:text-indigo-400"
+          >
             ¿Olvidaste tu contraseña?
           </Link>
         </div>
@@ -47,7 +66,10 @@ export default function LoginPage() {
 
       <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
         ¿No tienes cuenta?{' '}
-        <Link to="/register" className="font-medium text-indigo-600 hover:underline dark:text-indigo-400">
+        <Link
+          to="/register"
+          className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+        >
           Regístrate
         </Link>
       </p>

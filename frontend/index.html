@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finance Tracker</title>
     <script>
-      (function () {
+      ;(function () {
         try {
-          var stored = localStorage.getItem('finance-tracker-theme');
+          var stored = localStorage.getItem('finance-tracker-theme')
           var theme = stored
             ? JSON.parse(stored).state.theme
-            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          if (theme === 'dark') document.documentElement.classList.add('dark');
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+          if (theme === 'dark') document.documentElement.classList.add('dark')
         } catch (e) {}
-      })();
+      })()
     </script>
   </head>
   <body>

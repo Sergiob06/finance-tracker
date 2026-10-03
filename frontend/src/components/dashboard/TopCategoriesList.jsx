@@ -25,7 +25,10 @@ export default function TopCategoriesList({ data }) {
             <div className="mt-1.5 h-1.5 w-full rounded-full bg-gray-100 dark:bg-gray-800">
               <div
                 className="h-1.5 rounded-full transition-all"
-                style={{ width: `${(item.total / max) * 100}%`, backgroundColor: item.color ?? '#6366f1' }}
+                style={{
+                  width: `${(item.total / max) * 100}%`,
+                  backgroundColor: item.color ?? '#6366f1',
+                }}
               />
             </div>
           </li>

@@ -21,7 +21,9 @@ export default function BudgetsPage() {
 
   const expenseCategories = categories?.filter((category) => category.type === 'expense') ?? []
   const budgetedCategoryIds = new Set((budgets ?? []).map((budget) => budget.category.id))
-  const availableCategories = expenseCategories.filter((category) => !budgetedCategoryIds.has(category.id))
+  const availableCategories = expenseCategories.filter(
+    (category) => !budgetedCategoryIds.has(category.id),
+  )
 
   return (
     <div className="space-y-6">
@@ -63,7 +65,10 @@ export default function BudgetsPage() {
       {isPending && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="h-36 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800" />
+            <div
+              key={index}
+              className="h-36 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800"
+            />
           ))}
         </div>
       )}
@@ -85,12 +90,17 @@ export default function BudgetsPage() {
                   <div className="flex items-center gap-3">
                     <div
                       className="flex size-10 items-center justify-center rounded-xl"
-                      style={{ backgroundColor: `${budget.category.color}1A`, color: budget.category.color }}
+                      style={{
+                        backgroundColor: `${budget.category.color}1A`,
+                        color: budget.category.color,
+                      }}
                     >
                       <Icon className="size-5" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">{budget.category.name}</p>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {budget.category.name}
+                      </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         {formatCurrency(budget.spent)} de {formatCurrency(budget.amount)}
                       </p>

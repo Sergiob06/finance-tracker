@@ -40,7 +40,9 @@ function CategoryColumn({ title, type, categories, onEdit, onDelete, onCreate })
                   >
                     <Icon className="size-4" />
                   </div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{category.name}</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {category.name}
+                  </span>
                 </div>
 
                 <div className="flex gap-1 opacity-0 transition group-hover:opacity-100">
@@ -84,7 +86,10 @@ export default function CategoriesPage() {
       {isPending && (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {Array.from({ length: 2 }).map((_, index) => (
-            <div key={index} className="h-64 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800" />
+            <div
+              key={index}
+              className="h-64 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800"
+            />
           ))}
         </div>
       )}

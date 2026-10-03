@@ -23,7 +23,13 @@ export default function AccountFormModal({ onClose, account }) {
   const updateAccount = useUpdateAccount()
   const [form, setForm] = useState(() =>
     account
-      ? { name: account.name, type: account.type, balance: String(account.balance), color: account.color, icon: account.icon }
+      ? {
+          name: account.name,
+          type: account.type,
+          balance: String(account.balance),
+          color: account.color,
+          icon: account.icon,
+        }
       : DEFAULT_FORM,
   )
 
@@ -71,9 +77,21 @@ export default function AccountFormModal({ onClose, account }) {
       }
     >
       <form id="account-form" onSubmit={handleSubmit} className="space-y-4">
-        <FormField label="Nombre" name="name" value={form.name} onChange={handleChange} error={errors.name} />
+        <FormField
+          label="Nombre"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          error={errors.name}
+        />
 
-        <SelectField label="Tipo" name="type" value={form.type} onChange={handleChange} error={errors.type}>
+        <SelectField
+          label="Tipo"
+          name="type"
+          value={form.type}
+          onChange={handleChange}
+          error={errors.type}
+        >
           {ACCOUNT_TYPES.map((type) => (
             <option key={type.value} value={type.value}>
               {type.label}
@@ -93,7 +111,10 @@ export default function AccountFormModal({ onClose, account }) {
           />
         )}
 
-        <ColorPicker value={form.color} onChange={(color) => setForm((prev) => ({ ...prev, color }))} />
+        <ColorPicker
+          value={form.color}
+          onChange={(color) => setForm((prev) => ({ ...prev, color }))}
+        />
         <IconPicker value={form.icon} onChange={(icon) => setForm((prev) => ({ ...prev, icon }))} />
       </form>
     </Modal>

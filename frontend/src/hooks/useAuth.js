@@ -43,10 +43,11 @@ export function useCurrentUser() {
 
   return useQuery({
     queryKey: ['auth', 'me'],
-    queryFn: () => authApi.fetchCurrentUser().then((data) => {
-      setUser(data.data)
-      return data.data
-    }),
+    queryFn: () =>
+      authApi.fetchCurrentUser().then((data) => {
+        setUser(data.data)
+        return data.data
+      }),
     enabled: Boolean(token),
     retry: false,
   })

@@ -33,7 +33,10 @@ export default function SavingsGoalsPage() {
       {isPending && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="h-48 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800" />
+            <div
+              key={index}
+              className="h-48 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800"
+            />
           ))}
         </div>
       )}
@@ -116,7 +119,9 @@ export default function SavingsGoalsPage() {
         </div>
       )}
 
-      {modalGoal !== undefined && <SavingsGoalFormModal onClose={() => setModalGoal(undefined)} savingsGoal={modalGoal} />}
+      {modalGoal !== undefined && (
+        <SavingsGoalFormModal onClose={() => setModalGoal(undefined)} savingsGoal={modalGoal} />
+      )}
 
       {contributingGoal && (
         <ContributeModal onClose={() => setContributingGoal(null)} savingsGoal={contributingGoal} />
@@ -125,7 +130,9 @@ export default function SavingsGoalsPage() {
       <ConfirmDialog
         open={Boolean(deleting)}
         onClose={() => setDeleting(null)}
-        onConfirm={() => deleteSavingsGoal.mutate(deleting.id, { onSuccess: () => setDeleting(null) })}
+        onConfirm={() =>
+          deleteSavingsGoal.mutate(deleting.id, { onSuccess: () => setDeleting(null) })
+        }
         message={`Se eliminará la meta "${deleting?.name}" y su progreso de ahorro.`}
         isLoading={deleteSavingsGoal.isPending}
       />

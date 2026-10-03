@@ -1,8 +1,16 @@
 import clsx from 'clsx'
 
 const PRESET_COLORS = [
-  '#6366F1', '#3B82F6', '#22C55E', '#EF4444', '#F59E0B',
-  '#EC4899', '#8B5CF6', '#14B8A6', '#F97316', '#64748B',
+  '#6366F1',
+  '#3B82F6',
+  '#22C55E',
+  '#EF4444',
+  '#F59E0B',
+  '#EC4899',
+  '#8B5CF6',
+  '#14B8A6',
+  '#F97316',
+  '#64748B',
 ]
 
 export default function ColorPicker({ value, onChange }) {
@@ -18,7 +26,8 @@ export default function ColorPicker({ value, onChange }) {
             aria-label={color}
             className={clsx(
               'size-7 rounded-full transition',
-              value?.toLowerCase() === color.toLowerCase() && 'ring-2 ring-gray-900 ring-offset-2 dark:ring-white dark:ring-offset-gray-900',
+              value?.toLowerCase() === color.toLowerCase() &&
+                'ring-2 ring-gray-900 ring-offset-2 dark:ring-white dark:ring-offset-gray-900',
             )}
             style={{ backgroundColor: color }}
           />

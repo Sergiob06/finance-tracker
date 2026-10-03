@@ -1,5 +1,15 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import { ArrowLeftRight, Landmark, LayoutDashboard, LogOut, PiggyBank, Repeat, Tags, Target, Wallet } from 'lucide-react'
+import {
+  ArrowLeftRight,
+  Landmark,
+  LayoutDashboard,
+  LogOut,
+  PiggyBank,
+  Repeat,
+  Tags,
+  Target,
+  Wallet,
+} from 'lucide-react'
 import clsx from 'clsx'
 import { useAuthStore } from '../store/authStore'
 import { useCurrentUser, useLogout } from '../hooks/useAuth'
